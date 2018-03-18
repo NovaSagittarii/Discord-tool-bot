@@ -698,8 +698,9 @@ client.on("messageReactionAdd", (messageReaction, user) => {
             embed.addField('Message', messageReaction.message.content);
             embed.setThumbnail(messageReaction.message.author.avatarURL);
             if (messageReaction.count >= 7){
+                if(client.user.id in messageReaction.users) return;
+                messageReaction.message.react("⭐");
                 messageReaction.message.guild.channels.find('id', '412610188944605184').send({ embed });
-                messageReaction.message.clearReactions();
             }
     }
 });
